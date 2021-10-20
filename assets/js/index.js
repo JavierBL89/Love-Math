@@ -11,6 +11,12 @@ for(let button of buttons){
         }
     })
 }
+
+document.getElementById("answer-box").addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        checkAnswer()
+    }
+});
     runGame("addition");
 });
 
@@ -20,6 +26,8 @@ for(let button of buttons){
  * and after the user's answer has ben procceded
  */
 function runGame(gameType){
+
+    document.getElementById("answer-box").value = "";
 
   let num1 = Math.floor(Math.random() *25) + 1;
   let num2 = Math.floor(Math.random() *25) + 1;
@@ -49,7 +57,7 @@ calculateCorrectAnswer();
  * 2- OPTION Check the returned array from  calculateCorrectAnswer()
  */
 function checkAnswer(){
-    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let userAnswer = document.getElementById("answer-box").value;
         let result =  calculateCorrectAnswer();
         // 1- OPTION
 
@@ -115,7 +123,7 @@ function incrementScore(){
 
     // innerText NUMBERS CAN'T BE TARGGERED SO
     // WE NEED TO GET THE HTML AGAIN AND RESET IT AS A NUMBER 
-    document.getElementById("score").innerText = ++currentScore;
+    document.getElementById("score").innerText = currentScore++;
 }
 
 
@@ -140,8 +148,8 @@ function displayAdditionQuestion(operand1, operand2){
 
 
 function displaySubtractQuestion(operand1, operand2){
-    document.getElementById("operand1").textContent = operand1;
-    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operand1").innerText = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById("operand2").innerText = operand1 > operand2 ? operand2 : operand1;
     document.getElementById("operator").textContent = "-" ;
 
 }
